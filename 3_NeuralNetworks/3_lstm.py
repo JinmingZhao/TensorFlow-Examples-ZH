@@ -70,6 +70,12 @@ def RNN(x, weights, biases, init_state):
     # This input shape is required by `rnn` function
     x = tf.split(0, n_steps, x)
 
+    '''
+    个人觉得上面的三行代码是最难理解的,具体的reshape 的demo可以看1_Introduction中的basic_op.
+    最后转化成了每一副图像的第一行拿出来作为一个矩阵, 这样正好满足了[batch_size, cell.input_zise]的要求的格式,
+    具体的逻辑处理在rnn.rnn函数里边
+    '''
+
     # Define a lstm cell with tensorflow
     lstm_cell = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
 

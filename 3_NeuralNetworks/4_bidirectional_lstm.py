@@ -5,6 +5,8 @@ Long Short Term Memory paper: http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_l
 
 Author: Aymeric Damien
 Project: https://github.com/aymericdamien/TensorFlow-Examples/
+
+双向的lstm实现mnist数据集,但是跟单向的差距并不明显,整个程序重点理解bidirectional_rnn()
 '''
 
 import tensorflow as tf
@@ -70,6 +72,9 @@ def BiRNN(x, weights, biases):
     lstm_bw_cell = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
 
     # Get lstm cell output
+    '''
+    重点在这,上边创建了两个完全一样的lstm_cell但是所有的逻辑处理都在bidirectional_rnn这个函数里边,不用自己关心那个是feed哪个是back
+    '''
     outputs = rnn.bidirectional_rnn(lstm_fw_cell, lstm_bw_cell, x,
                                     dtype=tf.float32)
 
